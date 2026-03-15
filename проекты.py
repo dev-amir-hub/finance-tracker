@@ -1,4 +1,4 @@
-class FinanceTraker:
+class FinanceTraker:#это мой 1
     def __init__(self,owner):
         self.owner = owner
         self.balance=[]
