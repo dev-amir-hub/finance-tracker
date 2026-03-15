@@ -1,55 +1,53 @@
-class FinanceTraker:#это мой 1
-    def __init__(self,owner):
+class FinanceTraker:
+    def __init__(self, owner):
         self.owner = owner
-        self.balance=[]
+        self.balance = []
 
-
-    def dobavit(self,amount,opis):
+    def dobavit(self, amount, opis):
         operation = {
-            "type":"income",
-            'amount':amount,
-            'opis':opis
+            "type": "income",
+            "amount": amount,
+            "opis": opis
         }
         self.balance.append(operation)
         print(f'добавлено +{amount} рублей')
 
-
-
-    def ubavit(self,amount,opis):
+    def ubavit(self, amount, opis):
         operation = {
-            "type":"expence",
-            'amount':amount,
-            'opis':opis
+            "type": "expense",
+            "amount": amount,
+            "opis": opis
         }
         self.balance.append(operation)
         print(f'потрачено -{amount} рублей')
 
-
     def show_balance(self):
-        income=0
-        expence=0
+        income = 0
+        expense = 0
         for money in self.balance:
-            if money['type']=='income':
-                income+=money['amount']
+            if money['type'] == 'income':
+                income += money['amount']
             else:
-                expence+=money['amount']
-        print(f'\n Трекер:{self.owner}')
+                expense += money['amount']
+        print(f'\nТрекер: {self.owner}')
         print(f'заработано {income} руб')
-        print(f'потрачено {expence} руб')
-        print(f'баланс:{income-expence} руб')
-
+        print(f'потрачено {expense} руб')
+        print(f'баланс: {income - expense} руб')
 
     def history(self):
-        if len(self.balance)==0:
+        if len(self.balance) == 0:
             print('ничего не добавляли')
+            return                              # ← исправлено: добавили return
         for money in self.balance:
-            if money['type']=='income':
-                print(f'+{money['opis']}--{money["amount"]}')
+            if money['type'] == 'income':
+                print(f'+{money["opis"]}--{money["amount"]}')   # ← исправлено: кавычки
             else:
-                print(f'-{money['opis']}--{money["amount"]}')
+                print(f'-{money["opis"]}--{money["amount"]}')   # ← исправлено: кавычки
 
-tracker=FinanceTraker('Амир')
-print(f'Финаносвоый трекер {tracker.owner}')
+
+tracker = FinanceTraker('Амир')
+print(f'Финансовый трекер {tracker.owner}')
+
 while True:
     print("\n1  добавить доход")
     print("2  добавить расход")
@@ -66,7 +64,7 @@ while True:
     if choise == 1:
         amount = float(input("сколько заработали: "))
         opis = input("описание: ")
-        tracker.dobavit(amount, opis)  # вызываем метод объекта
+        tracker.dobavit(amount, opis)
     elif choise == 2:
         amount = float(input("сколько потратили: "))
         opis = input("описание: ")
